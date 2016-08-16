@@ -1,6 +1,26 @@
 # Goohara
 Android Kotlin Library for Code Diet
 
+```kotlin
+class ExampleActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_example)
+
+        d("Activity Created")
+        setToolbar(tb_activity_exmaple, "example")
+
+        vp_activity_example.setPagerAdapter(supportFragmentManager) {
+            addPage(PostListFragment(), "post")
+            addPage(NoticeListFragment(), "notice")
+        }
+        
+        postDelayed(3000) {
+            vp_activity_example.setCurrentItem(1, false)
+        }
+    }
+}
+```
 ## Getting started
 ### Dependency
 ```groovy
