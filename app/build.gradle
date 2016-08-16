@@ -1,5 +1,17 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.novoda.bintray-release'
+
+publish {
+    userOrg = 'frap'
+    groupId = 'com.frap'
+    artifactId = 'goohara'
+    publishVersion = '0.1.0'
+    desc = 'Android Kotlin Library for Code Diet'
+    website = 'https://github.com/hubojane/goohara'
+    issueTracker = "https://github.com/hubojane/goohara/issues"
+    repository = "https://github.com/hubojane/goohara.git"
+}
 
 android {
     compileSdkVersion 24

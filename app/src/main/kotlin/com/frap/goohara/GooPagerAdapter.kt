@@ -28,17 +28,14 @@ fun ViewPager.setPagerAdapter(fm: FragmentManager, init: GooPagerAdapter.() -> U
 class GooPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     private val mPages = arrayListOf<Page>()
 
-    override fun getCount(): Int {
-        return mPages.size
-    }
+    override fun getCount(): Int
+            = mPages.size
 
-    override fun getItem(position: Int): Fragment {
-        return mPages[position].fragment
-    }
+    override fun getItem(position: Int): Fragment
+            = mPages[position].fragment
 
-    override fun getPageTitle(position: Int): CharSequence? {
-        return mPages[position].title
-    }
+    override fun getPageTitle(position: Int): CharSequence?
+            = mPages[position].title
 
     fun addPage(fragment: Fragment, title: String? = null) {
         mPages.add(Page(fragment, title))
