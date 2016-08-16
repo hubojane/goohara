@@ -1,6 +1,7 @@
 # Goohara
 Android Kotlin Library for Code Diet
-
+* really easy to use
+* simplify your code
 ```kotlin
 class ExampleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
