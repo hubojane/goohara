@@ -23,14 +23,6 @@ class ExampleActivity : AppCompatActivity() {
 }
 ```
 ## Getting started
-###repository
-```groovy
- repositories {  
-   maven {  
-     url 'https://dl.bintray.com/frap/maven'  
-   }  
- } 
-```
 ### Dependency
 ```groovy
 dependencies {
