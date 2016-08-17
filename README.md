@@ -65,12 +65,12 @@ yourEditText.addTextWatcher {
 ### toast
 ```kotlin
 //short Toast
+toast(R.string.toast_text)
 toast("kara is best idol")
-toast(getString(R.string.toast_text))
 
 //long Toast
+longToast(R.string.toast_text)
 longToast("goohara is so beautiful")
-longToast(getString(R.string.toast_text))
 ```
 ### toolbar
 ```kotlin
