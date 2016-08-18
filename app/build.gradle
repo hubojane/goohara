@@ -6,7 +6,7 @@ publish {
     userOrg = 'frap'
     groupId = 'com.frap'
     artifactId = 'goohara'
-    publishVersion = '0.1.0'
+    publishVersion = '0.1.1'
     desc = 'Android Kotlin Library for Code Diet'
     website = 'https://github.com/hubojane/goohara'
     issueTracker = "https://github.com/hubojane/goohara/issues"
@@ -21,7 +21,7 @@ android {
         minSdkVersion 11
         targetSdkVersion 24
         versionCode 1
-        versionName "0.1.0"
+        versionName "0.1.1"
     }
     buildTypes {
         release {
