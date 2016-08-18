@@ -54,6 +54,10 @@ inline fun <reified T : Service> Context.startService(extras: Bundle, flags: Int
     startService(Intent(this, T::class.java).putExtras(extras).setFlags(flags))
 }
 
+inline fun <reified T : Service> Context.stopService() {
+    stopService(Intent(this, T::class.java))
+}
+
 inline fun <reified T : Activity> Activity.startForResult(code: Int) {
     startActivityForResult(Intent(this, T::class.java), code)
 }
