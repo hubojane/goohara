@@ -2,7 +2,7 @@ package com.frap.goohara
 
 import android.support.v4.view.ViewPager
 
-fun ViewPager.addPageChangListener(init: GooPagerWatcher.() -> Unit) {
+fun ViewPager.addPagerWatcher(init: GooPagerWatcher.() -> Unit) {
     addOnPageChangeListener(GooPagerWatcher().apply(init))
 }
 
