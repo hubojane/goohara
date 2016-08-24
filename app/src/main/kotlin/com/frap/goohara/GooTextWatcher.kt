@@ -25,52 +25,31 @@ fun EditText.addTextWatcher(init: GooTextWatcher.() -> Unit) {
 }
 
 class GooTextWatcher : TextWatcher {
-    private var mBeforeAction: (() -> Unit)? = null
-    private var mNowAction: (() -> Unit)? = null
-    private var mAfterAction: (() -> Unit)? = null
+    private var mBeforeListener: ((CharSequence?, Int, Int, Int) -> Unit)? = null
+    private var mNowListener: ((CharSequence?, Int, Int, Int) -> Unit)? = null
+    private var mAfterListener: ((Editable?) -> Unit)? = null
 
-    var before: Before = Before(null, 0, 0, 0)
-    var now: Now = Now(null, 0, 0, 0)
-    var after: After = After(null)
-
-    override fun beforeTextChanged(_text: CharSequence?, _start: Int, _count: Int, _after: Int) {
-        before.run {
-            text = _text
-            start = _start
-            count = _count
-            after = _after
-        }
-        mBeforeAction?.invoke()
+    override fun beforeTextChanged(text: CharSequence?, start: Int, count: Int, after: Int) {
+        mBeforeListener?.invoke(text, start, count, after)
     }
 
-    override fun onTextChanged(_text: CharSequence?, _start: Int, _before: Int, _count: Int) {
-        now.run {
-            text = _text
-            start = _start
-            before = _before
-            count = _count
-        }
-        mNowAction?.invoke()
+    override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
+        mNowListener?.invoke(text, start, before, count)
     }
 
-    override fun afterTextChanged(_editable: Editable?) {
-        after.editable = _editable
-        mAfterAction?.invoke()
+    override fun afterTextChanged(editable: Editable?) {
+        mAfterListener?.invoke(editable)
     }
 
-    fun beforeTextChanged(action: () -> Unit) {
-        mBeforeAction = action
+    fun beforeTextChanged(listener: (CharSequence?, Int, Int, Int) -> Unit) {
+        mBeforeListener = listener
     }
 
-    fun onTextChanged(action: () -> Unit) {
-        mNowAction = action
+    fun onTextChanged(listener: (CharSequence?, Int, Int, Int) -> Unit) {
+        mNowListener = listener
     }
 
-    fun afterTextChanged(action: () -> Unit) {
-        mAfterAction = action
+    fun afterTextChanged(listener: (Editable?) -> Unit) {
+        mAfterListener = listener
     }
-
-    inner class Before(var text: CharSequence?, var start: Int, var count: Int, var after: Int)
-    inner class Now(var text: CharSequence?, var start: Int, var before: Int, var count: Int)
-    inner class After(var editable: Editable?)
 }

@@ -6,47 +6,32 @@ fun ViewPager.addPagerWatcher(init: GooPagerWatcher.() -> Unit) {
     addOnPageChangeListener(GooPagerWatcher().apply(init))
 }
 
-class GooPagerWatcher: ViewPager.OnPageChangeListener {
-    private var mScrollChangedAction: (() -> Unit)? = null
-    private var mScrolledAction: (() -> Unit)? = null
-    private var mSelectedAction: (() -> Unit)? = null
+class GooPagerWatcher : ViewPager.OnPageChangeListener {
+    private var mScrollChangedListener: ((Int) -> Unit)? = null
+    private var mScrolledListener: ((Int, Float, Int) -> Unit)? = null
+    private var mSelectedListener: ((Int) -> Unit)? = null
 
-    var scrollChanged: ScrollChanged = ScrollChanged(0)
-    var scrolled: Scrolled = Scrolled(0, 0.toFloat(), 0)
-    var selected: Selected = Selected(0)
-
-    override fun onPageScrollStateChanged(_state: Int) {
-        scrollChanged.state = _state
-        mScrollChangedAction?.invoke()
+    override fun onPageScrollStateChanged(state: Int) {
+        mScrollChangedListener?.invoke(state)
     }
 
-    override fun onPageScrolled(_position: Int, _positionOffset: Float, _positionOffsetPixels: Int) {
-        scrolled.run {
-            position = _position
-            positionOffset = _positionOffset
-            positionOffsetPixels = _positionOffsetPixels
-        }
-        mScrolledAction?.invoke()
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+        mScrolledListener?.invoke(position, positionOffset, positionOffsetPixels)
     }
 
-    override fun onPageSelected(_position: Int) {
-        selected.position = _position
-        mSelectedAction?.invoke()
+    override fun onPageSelected(position: Int) {
+        mSelectedListener?.invoke(position)
     }
 
-    fun onPageScrollStateChanged(action: () -> Unit) {
-        mScrollChangedAction = action
+    fun onPageScrollStateChanged(listener: (Int) -> Unit) {
+        mScrollChangedListener = listener
     }
 
-    fun onPageScrolled(action: () -> Unit) {
-        mScrolledAction = action
+    fun onPageScrolled(listener: (Int, Float, Int) -> Unit) {
+        mScrolledListener = listener
     }
 
-    fun onPageSelected(action: () -> Unit) {
-        mSelectedAction = action
+    fun onPageSelected(listener: (Int) -> Unit) {
+        mSelectedListener = listener
     }
-
-    inner class ScrollChanged(var state: Int)
-    inner class Scrolled(var position: Int, var positionOffset: Float, var positionOffsetPixels: Int)
-    inner class Selected(var position: Int)
 }
